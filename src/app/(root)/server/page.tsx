@@ -1,6 +1,8 @@
-import { buttonVariants } from "@/components/ui/button";
+"use client";
+import { Button, buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import React from "react";
+import { signOut } from "next-auth/react";
 
 const ServerPage = () => {
   return (
@@ -9,6 +11,9 @@ const ServerPage = () => {
       <Link href={"/"} className={buttonVariants({ variant: "default" })}>
         Home
       </Link>
+      <Button onClick={() => signOut()} variant={"destructive"}>
+        Log out
+      </Button>
     </>
   );
 };
