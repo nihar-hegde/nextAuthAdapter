@@ -25,6 +25,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "../button";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
 
 const RegisterForm = () => {
   const router = useRouter();
@@ -105,6 +106,8 @@ const RegisterForm = () => {
           )}
         />
         <Button type="submit">Submit</Button>
+        <h1> --OR-- </h1>
+        <Button onClick={() => signIn("google")}>Login with google</Button>
       </form>
     </Form>
   );
