@@ -1,11 +1,14 @@
 // lib/nextauthOptions.ts
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 import bcrypt from "bcrypt";
 import clientPromise from "@/lib/mongodb";
 import { AuthOptions } from "next-auth";
+import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 
 export const nextauthOptions: AuthOptions = {
   // Configure one or more authentication providers
+  
   providers: [
     CredentialsProvider({
       id: "credentials",
@@ -47,8 +50,15 @@ export const nextauthOptions: AuthOptions = {
       },
     }),
     // ...add more providers here
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!
+    })
   ],
+  
   session: {
     strategy: "jwt",
   },
+  adapter: MongoDBAdapter(clientPromise),
+  
 };
